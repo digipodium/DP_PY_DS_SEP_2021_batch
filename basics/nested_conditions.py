@@ -16,6 +16,7 @@ if door == '2':
     print('it was a trap, you die')
 if door == '3':
     print('there is wall behind the door')
+    print('hehehe')
 
 
     
