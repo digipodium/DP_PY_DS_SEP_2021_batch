@@ -11,3 +11,6 @@ for i,j in zip(num, num2):
 
 for i,j,k in zip(num,num2,num3):
     print(i,j,k)
+
+for i in range(10):
+    print('well')
