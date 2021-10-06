@@ -14,6 +14,20 @@ sequence of data
 2. indexing n slicing
 3. looping / traversal of list
 4. functions of list
+    - *adding item*
+        - append()
+        - insert()
+        - extend()
+    - *removing item*
+        - remove()
+        - pop()
+        - clear()
+    - *utility func*
+        - reverse()
+        - sort()
+        - count()
+        - index()
+        - copy()
 5. list comprehension
 6. lambda expression
 7. `map` and `filter`
