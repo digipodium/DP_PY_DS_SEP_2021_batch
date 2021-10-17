@@ -24,12 +24,14 @@ sequence of data
         - popitem()
         - clear()
     - *utility func*
-        - items()
-        - values()
+        - items()  ✔
+        - values() ✔
         - keys()
-        - get()
+        - get() ✔
         - fromkeys()
         - copy()
+
 5. dictionary comprehension
 6. lambda expression
 7. `map` and `filter`
+8. nested dictionary
