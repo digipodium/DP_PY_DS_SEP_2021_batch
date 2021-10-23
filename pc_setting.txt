@@ -1,0 +1,4 @@
+ram -> 2
+windows -> 95
+version -> 3
+wallpaper -> cutiepie.jpg
