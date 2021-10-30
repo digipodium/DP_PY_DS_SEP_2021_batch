@@ -27,3 +27,5 @@ if Shape(38,39) > Shape(13,72):
 
 items.sort()
 print(items)
+
+print(items[0])
