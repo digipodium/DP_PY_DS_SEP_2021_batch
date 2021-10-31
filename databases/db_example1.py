@@ -38,4 +38,4 @@ def open_db():
     return Session() # this will give a connection to database
 
 
-# open_db() # test run one time only
+#open_db() # test run one time only
