@@ -47,19 +47,64 @@ def show_students_data():
                 db.close()
                 st.success("deletion completed, press R to refresh List")
             
-
+def find_student():
+    with st.form("search form"):
+        params = ['id','name','section','class']
+        c1, c2= st.columns(2)
+        by = c1.selectbox('Search Student by',options=params)
+        query = c2.text_input("type keyword here")
+        btn = st.form_submit_button("search")
+    
+    result = None
+    db = open_db()
+    if btn and query:
+        if by == params[0]:
+            result = db.query(Student).filter(Student.id==query)
+        if by == params[1]:
+            result = db.query(Student).filter(Student.name==query)
+        if by == params[2]:
+            result = db.query(Student).filter(Student.section==query)
+        if by == params[3]:
+            result = db.query(Student).filter(Student.klass==query)
+    if result:
+        count = result.count()
+        if count == 1:
+            student = result.all()[0]
+            st.info("Student details found")
+            st.markdown(f'''
+            ### {student.name}
+            - class : {student.klass}
+            - section : {student.section}
+            - online : { '✅' if student.is_online else '🚫'}
+            - admit date : {student.admit_date}
+            ''')
+        elif count > 1:
+            for student in result.all():
+                 st.markdown(f'''
+                ### {student.name}
+                - class : {student.klass}
+                - section : {student.section}
+                - online : { '✅' if student.is_online else '🚫'}
+                - admit date : {student.admit_date}
+                ---
+                ''')
+        else:
+            st.error("NO student found.")
+    db.close()
 # UI code
 st.title("Database Example")
 
-options = ['View Students','View Grades','Add Students','Add Grades']
+options = ['View Students','Find Student','View Grades','Add Students','Add Grades']
 
 choice = st.sidebar.radio("Select any option", options)
 
 if choice == options[0]:
     show_students_data()
 elif choice == options[1]:
-    pass
+    find_student()
 elif choice == options[2]:
-    show_student_form()
+    pass
 elif choice == options[3]:
+    show_student_form()
+elif choice == options[4]:
     show_grading_form()
