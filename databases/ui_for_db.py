@@ -38,6 +38,15 @@ def show_students_data():
             - online : { '✅' if student.is_online else '🚫'}
             - admit date : {student.admit_date}
             ''')
+            btn = st.button(f"delete {student.name}")
+            if btn:
+                db = open_db()
+                std = db.query(Student).get(student.id)
+                db.delete(std)
+                db.commit()
+                db.close()
+                st.success("deletion completed, press R to refresh List")
+            
 
 # UI code
 st.title("Database Example")
