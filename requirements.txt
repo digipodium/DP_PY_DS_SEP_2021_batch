@@ -9,3 +9,5 @@ selenium
 pillow
 opencv-contrib-python
 textblob
+selenium
+webdriver_manager
