@@ -16,7 +16,7 @@ def show_student_form():
 
     if btn and name and klass and section:
         db = open_db()
-        db.add(Student(name = name, section = section, klass= klass)) # add the student detail
+        db.add(Student(name = name, section = section, klass= klass, is_online=is_online)) # add the student detail
         db.commit() # save
         db.close() # close the db
         st.success("Saved Student details")
@@ -24,6 +24,20 @@ def show_student_form():
 
 def show_grading_form():
     pass
+
+def show_students_data():
+    db = open_db()
+    student_list = db.query(Student).all()
+    db.close()
+    for student in student_list:
+        with st.expander(f"Student detail: {student.name}",True):
+            st.subheader(student.name)
+            st.markdown(f'''
+            - class : {student.klass}
+            - section : {student.section}
+            - online : { '✅' if student.is_online else '🚫'}
+            - admit date : {student.admit_date}
+            ''')
 
 # UI code
 st.title("Database Example")
@@ -33,7 +47,7 @@ options = ['View Students','View Grades','Add Students','Add Grades']
 choice = st.sidebar.radio("Select any option", options)
 
 if choice == options[0]:
-    pass
+    show_students_data()
 elif choice == options[1]:
     pass
 elif choice == options[2]:

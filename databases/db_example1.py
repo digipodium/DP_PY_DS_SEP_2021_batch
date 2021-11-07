@@ -16,7 +16,7 @@ class Student(Base):
     admit_date = Column(DateTime,default=datetime.now())
 
     def __str__(self):
-        return f"{self.name} {self.klass}, {self.section}"
+        return f"{self.name} {self.klass}-{self.section}"
 
 class Grade(Base):
     __tablename__ = 'student_grades'
