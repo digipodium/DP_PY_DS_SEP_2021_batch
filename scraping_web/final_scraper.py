@@ -1,5 +1,6 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+import pandas as pd
 
 def get_fkrt_addr(query = 'bags',start_pos = 1):
     url = 'https://www.flipkart.com/search'
@@ -19,7 +20,7 @@ def extract_page_data(driver):
             ))
     return data
 
-def get_flipkart_data(search = 'bags',pos = 1,):
+def get_flipkart_data(search = 'bags', pos = 1, limit=None):
     driver = webdriver.Chrome(ChromeDriverManager().install())
     all_data= [] 
     while True:
@@ -28,11 +29,14 @@ def get_flipkart_data(search = 'bags',pos = 1,):
         data = extract_page_data(driver)
         if len(data):
             all_data.extend(data)
+            if limit and limit == pos:
+                break
             pos += 1
         else:
             driver.close()
             break
     return all_data
 
+content = get_flipkart_data('bags',limit=3)
 
-content = get_flipkart_data('bags')
+pd.DataFrame(content).to_csv('flipkart_bags.csv')
