@@ -41,8 +41,15 @@ if choice == ops[0]:
     c = st.color_picker("select a color")
     fig, ax = plt.subplots(figsize=(20,7))
     year_start = years.index(startyear)
-    df.loc[country,years[year_start:]].plot(kind=graph,ax=ax,color=c)
+    cdf = df.loc[country,years[year_start:]]
+    cdf.plot(kind=graph,ax=ax,color=c)
     st.pyplot(fig)
+    st.markdown(f'''
+        #### Maximum Immigration : {cdf.max()} 
+        #### Minimum Immigration : {cdf.min()}
+        #### Average Immigration : {cdf.mean():.2f}
+    ''')
+    st.write(cdf.head())
 
 if choice == ops[1]:
     show_comparison()
